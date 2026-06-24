@@ -91,8 +91,7 @@ export default function ContactSection() {
                   <h4 className="font-display text-lg text-cms-dark">Adresse</h4>
                   <p className="mt-1 text-cms-gray text-sm">
                     Centre Mohammed VI de Soutien à la Microfinance Solidaire<br />
-                    Avenue Mohammed VI, Rabat, Maroc
-                  </p>
+                 Hay Chabab, Rue Baamrani, Ain Sebaa 20480, Casablanca, Maroc                  </p>
                 </div>
               </div>
 
@@ -103,8 +102,11 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-display text-lg text-cms-dark">Téléphone</h4>
                   <p className="mt-1 text-cms-gray text-sm">
-                    +212 5XX XX XX XX
+                    Tél : +212 5 22 73 90 89 / +212 5 22 73 91 24 <br />
+                                   Fax : +212 5 22 73 79 33
+
                   </p>
+                  
                 </div>
               </div>
 
