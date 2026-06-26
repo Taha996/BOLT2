@@ -44,7 +44,14 @@ export const navigation: NavGroup[] = [
   },
   {
     label: 'Carrefour communication',
-    children: ['actualites', 'gallery', 'gallery-video', 'recrutement', 'bibliotheque'],
+    children: [
+      'actualites',
+      'gallery',
+      'gallery-video',
+      'publication',
+      'recrutement',
+      'bibliotheque',
+    ],
   },
   { label: 'Contact', children: ['contact'] },
 ];
