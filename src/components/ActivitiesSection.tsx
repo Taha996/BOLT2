@@ -1,15 +1,22 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Check } from 'lucide-react';
-import { activities, Activity } from '../data/cmsData';
-import Modal from './Modal';
+import { ArrowRight } from 'lucide-react';
+import { activities } from '../data/cmsData';
 
 gsap.registerPlugin(ScrollTrigger);
 
+/** Maps the homepage activity cards to their dedicated detail pages. */
+const activityRoutes: Record<number, string> = {
+  1: '/formation',
+  2: '/appui-a-la-micro-entreprise',
+  3: '/observatoire',
+  4: '/communication-et-partenariat',
+};
+
 export default function ActivitiesSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [selected, setSelected] = useState<Activity | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -47,9 +54,9 @@ export default function ActivitiesSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {activities.map((activity) => (
-            <div
+            <Link
               key={activity.id}
-              onClick={() => setSelected(activity)}
+              to={activityRoutes[activity.id] ?? '/'}
               className="activity-card group bg-white overflow-hidden cursor-pointer"
             >
               <div className="aspect-[4/3] overflow-hidden">
@@ -71,58 +78,10 @@ export default function ActivitiesSection() {
                   <ArrowRight size={16} />
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
-
-      <Modal isOpen={selected !== null} onClose={() => setSelected(null)}>
-        {selected && (
-          <article>
-            <div className="aspect-[16/9] w-full overflow-hidden">
-              <img
-                src={selected.image}
-                alt={selected.title}
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="p-6 md:p-10">
-              <span className="text-cms-terracotta font-body text-sm font-medium tracking-widest uppercase">
-                Nos activités
-              </span>
-              <h2 className="mt-3 font-display text-3xl md:text-4xl leading-tight text-cms-dark">
-                {selected.title}
-              </h2>
-
-              <div className="mt-6 space-y-4">
-                {(selected.details ?? [selected.description]).map((paragraph, i) => (
-                  <p key={i} className="text-cms-gray leading-relaxed text-body">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-
-              {selected.highlights && selected.highlights.length > 0 && (
-                <div className="mt-8">
-                  <h3 className="font-display text-xl text-cms-dark">
-                    Ce que nous proposons
-                  </h3>
-                  <ul className="mt-4 space-y-3">
-                    {selected.highlights.map((item) => (
-                      <li key={item} className="flex items-start gap-3">
-                        <span className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-cms-green/10 text-cms-green">
-                          <Check size={14} />
-                        </span>
-                        <span className="text-cms-gray leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-            </div>
-          </article>
-        )}
-      </Modal>
     </section>
   );
 }

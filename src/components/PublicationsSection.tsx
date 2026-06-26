@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Download, FileText } from 'lucide-react';
+import { Download, FileText, ArrowRight } from 'lucide-react';
 import { publications } from '../data/cmsData';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -74,8 +75,9 @@ export default function PublicationsSection() {
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredPublications.map((pub) => (
-            <div
+            <Link
               key={pub.id}
+              to="/publication"
               className="publication-card group bg-white overflow-hidden cursor-pointer hover:shadow-lg transition-shadow duration-300"
             >
               <div className="aspect-[3/4] overflow-hidden relative">
@@ -109,8 +111,15 @@ export default function PublicationsSection() {
                   {pub.description}
                 </p>
               </div>
-            </div>
+            </Link>
           ))}
+        </div>
+
+        <div className="mt-12 text-center">
+          <Link to="/publication" className="btn-primary gap-2">
+            Voir toutes les publications
+            <ArrowRight size={18} />
+          </Link>
         </div>
       </div>
     </section>

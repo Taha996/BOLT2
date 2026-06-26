@@ -1,30 +1,33 @@
+import { Link } from 'react-router-dom';
 import { Facebook, Twitter, Linkedin, Youtube, Mail, ArrowRight } from 'lucide-react';
+import { contactInfo } from '../data/nav';
 
-const footerLinks = {
+const footerLinks: Record<string, { label: string; to: string }[]> = {
   'Qui sommes-nous': [
-    'Présentation',
-    'Infrastructure',
-    'Conseil d\'administration',
-    'Organigramme',
-    'Notre équipe',
+    { label: 'Présentation', to: '/presentation' },
+    { label: 'Infrastructure', to: '/infrastructure' },
+    { label: "Conseil d'administration", to: '/conseil-dadministration' },
+    { label: 'Organigramme', to: '/organigramme' },
+    { label: 'Notre équipe', to: '/qsn_equipes' },
   ],
   'Activités': [
-    'Formation',
-    'Appui à la micro-entreprise',
-    'Observatoire',
-    'E-learning',
+    { label: 'Formation', to: '/formation' },
+    { label: 'Appui à la micro-entreprise', to: '/appui-a-la-micro-entreprise' },
+    { label: 'Observatoire', to: '/observatoire' },
+    { label: 'E-learning', to: '/e-learning' },
   ],
-  'Observatoire': [
-    'Cartographie',
-    'Tendances',
-    'Factsheets',
-    'Études',
+  'Outils de suivi': [
+    { label: 'Agenda', to: '/agenda' },
+    { label: 'Éducation financière', to: '/education-financiere' },
+    { label: 'Cartographie nationale', to: '/cartographie-nationale-de-la-microfinance' },
+    { label: 'Promotion & commercialisation', to: '/valorisationmicroentrepreneurs' },
   ],
-  'Publications': [
-    'Rapports',
-    'Études',
-    'Documentation',
-    'Publications',
+  'Communication': [
+    { label: 'Actualités', to: '/actualites' },
+    { label: 'Photothèque', to: '/gallery' },
+    { label: 'Vidéothèque', to: '/gallery-video' },
+    { label: 'Publications', to: '/publication' },
+    { label: 'Recrutement et stages', to: '/recrutement' },
   ],
 };
 
@@ -63,7 +66,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {/* Logo & Description */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1 mb-8 lg:mb-0">
-            <div className="flex items-center gap-3 mb-6">
+            <Link to="/" className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 flex items-center justify-center overflow-hidden">
                 <img
                   src="/images/logo.png"
@@ -79,7 +82,7 @@ export default function Footer() {
                   Microfinance Solidaire
                 </p>
               </div>
-            </div>
+            </Link>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs">
               Formation, accompagnement, observatoire et promotion de la microfinance solidaire au Maroc depuis 2007.
             </p>
@@ -105,13 +108,13 @@ export default function Footer() {
               <h4 className="font-display text-sm font-medium mb-4">{title}</h4>
               <ul className="space-y-3">
                 {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
+                  <li key={link.to}>
+                    <Link
+                      to={link.to}
                       className="text-white/60 text-sm hover:text-white transition-colors"
                     >
-                      {link}
-                    </a>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -124,7 +127,20 @@ export default function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-white/60 text-sm">
                 <Mail size={14} className="mt-1 flex-shrink-0" />
-                <span>contact@cm6-microfinance.ma</span>
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="hover:text-white transition-colors break-all"
+                >
+                  {contactInfo.email}
+                </a>
+              </li>
+              <li>
+                <Link
+                  to="/contact"
+                  className="text-white/60 text-sm hover:text-white transition-colors"
+                >
+                  Nous contacter
+                </Link>
               </li>
             </ul>
             <div className="mt-6 flex items-center gap-2 text-white/60 text-sm">

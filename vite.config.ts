@@ -3,4 +3,20 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('site.json')) return 'site-data'
+          if (id.includes('node_modules/gsap')) return 'gsap'
+          if (
+            id.includes('node_modules/react-router') ||
+            id.includes('node_modules/react-dom') ||
+            id.includes('node_modules/react/')
+          )
+            return 'react-vendor'
+        },
+      },
+    },
+  },
 })

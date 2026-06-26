@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Monitor, BookOpen, Users, ArrowRight, Play } from 'lucide-react';
@@ -105,10 +106,10 @@ export default function ELearningSection() {
               </div>
             </div>
 
-            <button className="mt-10 btn-primary gap-2">
+            <Link to="/e-learning" className="mt-10 btn-primary gap-2">
               Accéder à la plateforme
               <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
 
           {/* Right Modules */}

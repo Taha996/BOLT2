@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Map, TrendingUp, FileBarChart, BookOpen, ArrowRight } from 'lucide-react';
@@ -106,10 +107,10 @@ export default function ObservatorySection() {
               </div>
             </div>
 
-            <button className="mt-10 btn-terracotta gap-2">
+            <Link to="/observatoire" className="mt-10 btn-terracotta gap-2">
               Explorer l'Observatoire
               <ArrowRight size={18} />
-            </button>
+            </Link>
           </div>
 
           {/* Right Features Grid */}
